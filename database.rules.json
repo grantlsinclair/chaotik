@@ -1,0 +1,62 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      "$uid": {
+        "public": {
+          ".read": "auth.uid != null",
+        	"lastOnline": {
+            ".write": "auth.uid === $uid",
+            ".validate": "newData.val() == now"
+          }
+        },
+        "request": {
+          ".write": "auth.uid === $uid"
+        }
+      }
+    },
+    "games": {
+      "$gid": {
+        ".read": "auth.uid != null",
+        "turns": {
+          "$turnID": {
+          ".write": "!data.exists()&&
+            newData.hasChildren(['uid', 'time'])&&
+            (newData.child('uid').val()==auth.uid)&&
+            (newData.child('time').val()==now)&&  
+            (data.parent().parent().child('info').child('wid').val()===auth.uid ||
+             data.parent().parent().child('info').child('bid').val()===auth.uid)"
+          }
+        },
+        "chats": {
+          "$chatID": {
+          ".write": "!data.exists()&&
+            newData.hasChildren(['uid', 'time'])&&
+            (newData.child('uid').val()==auth.uid)&&
+            (newData.child('time').val()==now)&&  
+            (data.parent().parent().child('info').child('wid').val()===auth.uid ||
+             data.parent().parent().child('info').child('bid').val()===auth.uid)"
+          }
+        }
+      }
+    },
+    "waitList": {
+      ".read": "auth.uid != null",
+      "$uid": {
+        ".write": "auth.uid === $uid"
+      }
+    },
+    "connections": {
+      "$uid": {
+        ".read": "auth.uid != null",
+        ".write": "auth.uid === $uid"
+      }
+    },
+    "names": {
+      "$name": {
+        ".read": "auth.uid != null"
+      }
+    }
+  }
+}
