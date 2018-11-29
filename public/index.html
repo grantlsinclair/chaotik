@@ -53,6 +53,8 @@
           uid=null
         }
       });
+//      $('#lobbyDiv').hide()
+  //    $('#gameDiv').hide()
     })
     </script>
 
@@ -61,9 +63,104 @@
 
   </head>
   <body>
-    <p>This is a paragraph</p>
-
-
-
+    <div id=mainDiv>
+    <div id=lobbyDiv>
+      <button id=playButton type=button class="btn btn-primary"></button>
+      <ul id=gameList></ul>
+    </div>
+    <div id=gameDiv>
+      <div class=row id="upperPlayerDiv" class="playerBar">
+        <div class="col-1">
+          <button id=closeGameButton class="btn btn-warning">×</button>
+        </div>
+        <div class="col-2">
+          <div id="upperPlayerCrowns" class="card">
+            <div class="card-body">
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div id="upperPlayerName" class="card">
+            <div class="card-body">
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div id="upperPlayerTimer" class="card">
+            <div class="card-body">
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-1">
+          <button id=resignButton class="btn btn-danger">Resign</button>
+        </div>
+      </div>
+      <div id="boardDiv">
+        <svg id='arrowCanvas' viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowHeadOrange" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth" viewBox="0 0 20 20">>
+              <path d="M0,0 L0,6 L9,3 z" fill=orange />
+            </marker>
+            <marker id="arrowHeadGreen" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth" viewBox="0 0 20 20">>
+              <path d="M0,0 L0,6 L9,3 z" fill=green />
+            </marker>
+            <marker id="arrowHeadBlue" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth" viewBox="0 0 20 20">>
+              <path d="M0,0 L0,6 L9,3 z" fill=blue />
+            </marker>
+            <marker id="arrowHeadPurple" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth" viewBox="0 0 20 20">>
+              <path d="M0,0 L0,6 L9,3 z" fill=purple />
+            </marker>
+          </defs>
+          <g id="arrowInsertion"></g>
+        </svg>
+        <div class='chessRank'><div class='chessSquare lightSquare' id='a8'></div><div class='chessSquare darkSquare' id='b8'></div><div class='chessSquare lightSquare' id='c8'></div><div class='chessSquare darkSquare' id='d8'></div><div class='chessSquare lightSquare' id='e8'></div><div class='chessSquare darkSquare' id='f8'></div><div class='chessSquare lightSquare' id='g8'></div><div class='chessSquare darkSquare' id='h8'></div></div>
+        <div class='chessRank'><div class='chessSquare darkSquare' id='a7'></div><div class='chessSquare lightSquare' id='b7'></div><div class='chessSquare darkSquare' id='c7'></div><div class='chessSquare lightSquare' id='d7'></div><div class='chessSquare darkSquare' id='e7'></div><div class='chessSquare lightSquare' id='f7'></div><div class='chessSquare darkSquare' id='g7'></div><div class='chessSquare lightSquare' id='h7'></div></div>
+        <div class='chessRank'><div class='chessSquare lightSquare ' id='a6'></div><div class='chessSquare darkSquare' id='b6'></div><div class='chessSquare lightSquare' id='c6'></div><div class='chessSquare darkSquare' id='d6'></div><div class='chessSquare lightSquare' id='e6'></div><div class='chessSquare darkSquare' id='f6'></div><div class='chessSquare lightSquare' id='g6'></div><div class='chessSquare darkSquare' id='h6'></div></div>
+        <div class='chessRank'><div class='chessSquare darkSquare' id='a5'></div><div class='chessSquare lightSquare' id='b5'></div><div class='chessSquare darkSquare' id='c5'></div><div class='chessSquare lightSquare' id='d5'></div><div class='chessSquare darkSquare' id='e5'></div><div class='chessSquare lightSquare' id='f5'></div><div class='chessSquare darkSquare' id='g5'></div><div class='chessSquare lightSquare' id='h5'></div></div>
+        <div class='chessRank'><div class='chessSquare lightSquare' id='a4'></div><div class='chessSquare darkSquare' id='b4'></div><div class='chessSquare lightSquare' id='c4'></div><div class='chessSquare darkSquare' id='d4'></div><div class='chessSquare lightSquare' id='e4'></div><div class='chessSquare darkSquare' id='f4'></div><div class='chessSquare lightSquare' id='g4'></div><div class='chessSquare darkSquare' id='h4'></div></div>
+        <div class='chessRank'><div class='chessSquare darkSquare' id='a3'></div><div class='chessSquare lightSquare' id='b3'></div><div class='chessSquare darkSquare' id='c3'></div><div class='chessSquare lightSquare' id='d3'></div><div class='chessSquare darkSquare' id='e3'></div><div class='chessSquare lightSquare' id='f3'></div><div class='chessSquare darkSquare' id='g3'></div><div class='chessSquare lightSquare' id='h3'></div></div>
+        <div class='chessRank'><div class='chessSquare lightSquare' id='a2'></div><div class='chessSquare darkSquare' id='b2'></div><div class='chessSquare lightSquare' id='c2'></div><div class='chessSquare darkSquare' id='d2'></div><div class='chessSquare lightSquare' id='e2'></div><div class='chessSquare darkSquare' id='f2'></div><div class='chessSquare lightSquare' id='g2'></div><div class='chessSquare darkSquare' id='h2'></div></div>
+        <div class='chessRank'><div class='chessSquare darkSquare' id='a1'></div><div class='chessSquare lightSquare' id='b1'></div><div class='chessSquare darkSquare' id='c1'></div><div class='chessSquare lightSquare' id='d1'></div><div class='chessSquare darkSquare' id='e1'></div><div class='chessSquare lightSquare' id='f1'></div><div class='chessSquare darkSquare' id='g1'></div><div class='chessSquare lightSquare' id='h1'></div></div>
+      </div>
+      <div id="turnDiv">
+        <a id="turnBackToStart" class="btn btn-primary" role="button">≤</a>
+        <a id="turnBack" class="btn btn-primary" role="button">&#60</a>
+        <a id="turnForward" class="btn btn-primary" role="button">&#62</a>
+        <a id="turnForwardToEnd" class="btn btn-primary" role="button">≥</a>
+      </div>
+      <div class=row id="lowerPlayerDiv" class="playerBar">
+        <div class="col-1">
+          <div id="blankPlaceHolder" class="card">
+          </div>
+        </div>
+        <div class="col-2">
+          <div id="lowerPlayerCrowns" class="card">
+            <div class="card-body">
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div id="lowerPlayerName" class="card">
+            <div class="card-body">
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div id="lowerPlayerTimer" class="card">
+            <div class="card-body">
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-1">
+          <button id=endTurnButton class="btn btn-primary">End</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
