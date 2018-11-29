@@ -1,0 +1,71 @@
+body {
+  margin:0;
+  overflow-y: hidden;
+}
+
+.chessSquare {
+  display: inline-block;
+}
+
+.lightSquare {
+  background-color: #ffce9e;
+}
+
+.darkSquare {
+  background-color: #d18b47;
+}
+
+.selectedSquare {
+  background-color: #909090;
+}
+
+.targetSquare {
+  background-color: #b0b0b0;
+}
+
+.playerBar {
+  background-color: #00A0A0;
+  display: flex;
+}
+
+#closeGameButton {
+  flex-basis: 10%;
+}
+
+.crownLabel {
+  flex-basis: 20%;
+}
+
+.playerNameLabel {
+  flex-basis: 40%;
+}
+
+.timerLabel {
+  flex-basis: 20%;
+}
+
+#resignButton {
+  flex-basis: 10%;
+}
+
+#endTurnButton {
+  flex-basis: 10%;
+}
+
+#lowerPlayerPlaceholder {
+  flex-basis: 10%;
+}
+
+#turnDiv {
+  display: flex;
+  justify-content: space-around;
+}
+
+#turnDiv > a {
+  flex-basis: 10%;
+}
+
+#arrowCanvas {
+  position: absolute;
+  pointer-events:none;
+}

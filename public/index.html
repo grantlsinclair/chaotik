@@ -30,6 +30,27 @@
 
     var uid
 
+    function resize() {
+      // This gets called once the page is loaded, and whenever it is resized
+      var fullWidth=window.innerWidth, fullHeight=window.innerHeight, width, height
+      // The 'full' values are the size of the viewport, not accounting for scrollbars.
+      // If the full width is >2/3 of the full height, the full height is used
+      // and the width is set to 2/3 of the height.
+      // Otherwise, the full width is used and the height is 3/2 of the full width.
+      if (fullWidth>fullHeight*2/3) {
+        height=fullHeight
+        width=2/3*height
+      } else {
+        width=fullWidth
+        height=3/2*width
+      }
+      $('#mainDiv').css('width', width+'px')
+      $('.playerBar').css('height', width*.2+'px')
+      $('#turnDiv').css('height', width*.1+'px')
+      $('.chessRank').css('height', width/8+'px')
+      $('.chessSquare').css('width', width/8+'px').css('height', width/8+'px')
+    }
+
     $(document).ready(function() {
       // Attempt to sign-in to firebase anonymously
       firebase.auth().signInAnonymously().catch(function(error) {
@@ -53,13 +74,14 @@
           uid=null
         }
       });
+      resize();
+      $(window).resize(function() {
+        resize();
+      })
 //      $('#lobbyDiv').hide()
   //    $('#gameDiv').hide()
     })
     </script>
-
-
-
 
   </head>
   <body>
@@ -69,34 +91,28 @@
       <ul id=gameList></ul>
     </div>
     <div id=gameDiv>
-      <div class=row id="upperPlayerDiv" class="playerBar">
-        <div class="col-1">
+      <div id="upperPlayerDiv" class="playerBar">
+        <span>
           <button id=closeGameButton class="btn btn-warning">×</button>
-        </div>
-        <div class="col-2">
-          <div id="upperPlayerCrowns" class="card">
-            <div class="card-body">
-              <p class="card-text"></p>
-            </div>
+        </span>
+        <span id="upperPlayerCrowns" class="card crownLabel">
+          <div class="card-body">
+            <p class="card-text"></p>
           </div>
-        </div>
-        <div class="col-6">
-          <div id="upperPlayerName" class="card">
-            <div class="card-body">
-              <p class="card-text"></p>
-            </div>
+        </span>
+        <span id="upperPlayerName" class="card playerNameLabel">
+          <div class="card-body">
+            <p class="card-text"></p>
           </div>
-        </div>
-        <div class="col-2">
-          <div id="upperPlayerTimer" class="card">
-            <div class="card-body">
-              <p class="card-text"></p>
-            </div>
+        </span>
+        <span id="upperPlayerTimer" class="card timerLabel">
+          <div class="card-body">
+            <p class="card-text"></p>
           </div>
-        </div>
-        <div class="col-1">
-          <button id=resignButton class="btn btn-danger">Resign</button>
-        </div>
+        </span>
+        <span>
+          <button id=resignButton class="btn btn-danger">R</button>
+        </span>
       </div>
       <div id="boardDiv">
         <svg id='arrowCanvas' viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
@@ -126,40 +142,31 @@
         <div class='chessRank'><div class='chessSquare darkSquare' id='a1'></div><div class='chessSquare lightSquare' id='b1'></div><div class='chessSquare darkSquare' id='c1'></div><div class='chessSquare lightSquare' id='d1'></div><div class='chessSquare darkSquare' id='e1'></div><div class='chessSquare lightSquare' id='f1'></div><div class='chessSquare darkSquare' id='g1'></div><div class='chessSquare lightSquare' id='h1'></div></div>
       </div>
       <div id="turnDiv">
-        <a id="turnBackToStart" class="btn btn-primary" role="button">≤</a>
-        <a id="turnBack" class="btn btn-primary" role="button">&#60</a>
-        <a id="turnForward" class="btn btn-primary" role="button">&#62</a>
-        <a id="turnForwardToEnd" class="btn btn-primary" role="button">≥</a>
+        <a id="turnBackToStart" class="btn btn-info" role="button">≤</a>
+        <a id="turnBack" class="btn btn-info" role="button">&#60</a>
+        <a id="turnForward" class="btn btn-info" role="button">&#62</a>
+        <a id="turnForwardToEnd" class="btn btn-info" role="button">≥</a>
       </div>
-      <div class=row id="lowerPlayerDiv" class="playerBar">
-        <div class="col-1">
-          <div id="blankPlaceHolder" class="card">
+      <div id="lowerPlayerDiv" class="playerBar">
+        <span id=lowerPlayerPlaceholder></span>
+        <span id="lowerPlayerCrowns" class="card crownLabel">
+          <div class="card-body">
+            <p class="card-text"></p>
           </div>
-        </div>
-        <div class="col-2">
-          <div id="lowerPlayerCrowns" class="card">
-            <div class="card-body">
-              <p class="card-text"></p>
-            </div>
+        </span>
+        <span id="lowerPlayerName" class="card playerNameLabel">
+          <div class="card-body">
+            <p class="card-text"></p>
           </div>
-        </div>
-        <div class="col-6">
-          <div id="lowerPlayerName" class="card">
-            <div class="card-body">
-              <p class="card-text"></p>
-            </div>
+        </span>
+        <span id="lowerPlayerTimer" class="card timerLabel">
+          <div class="card-body">
+            <p class="card-text"></p>
           </div>
-        </div>
-        <div class="col-2">
-          <div id="lowerPlayerTimer" class="card">
-            <div class="card-body">
-              <p class="card-text"></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-1">
+        </span>
+        <span>
           <button id=endTurnButton class="btn btn-primary">End</button>
-        </div>
+        </span>
       </div>
     </div>
   </body>
